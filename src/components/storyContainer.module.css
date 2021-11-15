@@ -1,0 +1,19 @@
+/* .storyContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+.storyContainer {
+    position: relative;
+    height: 85%;
+    border-radius: 0px 0px 10px 10px;
+}
+  
+.storyContainer p, .storyContainer img, .storyContainer video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
