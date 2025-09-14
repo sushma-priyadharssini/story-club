@@ -1,9 +1,28 @@
-.storyCircle {
-    height: 100px;
-    width: 100px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 10px;
-    cursor: pointer;
+/* .storyCircle {
+  height: 100px;
+  width: 100px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 10px;
+  cursor: pointer;
+} */
+
+.outerStoryCircle {
+  height: 100px;
+  width: 100px;
+  border: 2px solid #d80970; /* Outer border */
+  border-radius: 50%; /* Circle shape */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.innerStoryCircle {
+  width: 90px; /* Smaller size → creates gap */
+  height: 90px;
+  background-color: lightblue;
+  border-radius: 50%; /* Circle shape */
 }

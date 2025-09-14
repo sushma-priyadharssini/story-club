@@ -2,8 +2,12 @@ import React from 'react';
 
 const storyContext = React.createContext({
     stories: [],
-    currentUserStorySetId: null,
-    setCurrentUserStorySetId: (id) => {},
+    currentUserStoryList: null,
+    setCurrentUserStoryList: (story) => { },
+    currentStory: null,
+    setCurrentStory: (story) => { },
+    pauseStory: false,
+    setPauseStory: (pause) => { },
 });
 
 export default storyContext;

@@ -3,17 +3,20 @@ import classes from './storyPreview.module.css';
 import storyContext from '../store/storyContext';
 
 const StoryPreview = (props) => {
-    const { setCurrentUserStorySetId } = useContext(storyContext);
+    const { setCurrentUserStoryList } = useContext(storyContext);
     const showStory = () => {
-        setCurrentUserStorySetId(props.story.id);
+        setCurrentUserStoryList(props.story);
     }
-    return (
-        <span 
-            className={classes.storyCircle} 
-            style={{ backgroundColor: props.story.stories[0].color }}
-            onClick={showStory.bind(this)}>
-        </span>
+    return (<>
+        <div className={classes.outerStoryCircle} >
+            <div
+                className={classes.innerStoryCircle}
+                onClick={showStory}
+                style={{ backgroundColor: props.story.stories[0].color }}></div>
+        </div>
+    </>
+
     )
 }
 
-export default  StoryPreview;
+export default StoryPreview;

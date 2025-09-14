@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import GlobalContext from './store/globalContext';
 import StoryContext from './store/storyContext';
 import AllStories from './components/allStories';
 import StoryContainer from './components/storyContainer';
+import { STORIES } from "./data"
 
 function App() {
   const globalCtx = {
@@ -10,31 +11,26 @@ function App() {
     height: 350,
     width: 650
   };
-  const [currentStorySetId, setCurrentStorySetId] = useState(1);
-  const updateStorySetId = (id) => {
-    setCurrentStorySetId(id);
-  }
+  const [currentUserStoryList, setCurrentUserStoryList] = useState(null);
+  const [currentStory, setCurrentStory] = useState(null);
+  const [pauseStory, setPauseStory] = useState(false);
+
   const storyCtx = {
-    stories: [
-      { id: 1, stories: [
-        { id: 1, type: 'TEXT', text: 'aajdksajdk kndkasdkja kdnksjnda', color: '#F08080' },
-        { id: 2, type: 'TEXT', text: 'ab', color: 'darkkhaki' },
-        { id: 3, type: 'IMAGE', src:'/logo192.png' },
-        { id: 4, type: 'IMAGE', src: '/manda_batharam.gif' }] },
-      { id: 2, stories: [
-        { id: 1, type: 'TEXT', text: 'bc', color: 'turquoise' },
-        { id: 2, type: 'VIDEO', src: '/video.mp4', duration: 18000 },
-        { id: 3, type: 'TEXT', text: 'ab', color: 'sandybrown' }] }
-    ],
-    currentUserStorySetId: currentStorySetId,
-    setCurrentUserStorySetId: updateStorySetId
+    stories: STORIES,
+    currentUserStoryList,
+    setCurrentUserStoryList,
+    currentStory,
+    setCurrentStory,
+    pauseStory,
+    setPauseStory
   };
+
   return (
     <GlobalContext.Provider value={globalCtx}>
       <StoryContext.Provider value={storyCtx}>
         <div className="pageContainer">
-          <AllStories></AllStories>
-          <StoryContainer></StoryContainer>
+          <AllStories />
+          <StoryContainer />
         </div>
       </StoryContext.Provider>
     </GlobalContext.Provider>
