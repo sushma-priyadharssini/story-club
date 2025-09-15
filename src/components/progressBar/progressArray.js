@@ -39,7 +39,15 @@ const ProgressArray = () => {
         return currentStory.duration ?? defaultInterval
     }, [currentStory, defaultInterval])
 
+    // Recursive call of requestAnimationFrame for each frame within a story
     const incrementCount = useCallback(() => {
+        /* 
+       - interval is required duration for that story to be visible
+       - count is the current progress value (between 0–100).
+       - (interval / 1000) converts milliseconds -> seconds.
+       - ((interval / 1000) * 60) gives how many frames the interval would last (since browsers aim for ~60 frames/sec).
+       - 100 / (...) means “how much should count increase per frame” so that it smoothly reaches 100% when time is up.
+        */
         const interval = getCurrentInterval();
         const updatedCount = count + (100 / ((interval / 1000) * 60))
         setCount(updatedCount);
@@ -51,15 +59,13 @@ const ProgressArray = () => {
             } else {
                 nextStory();
             }
+            setCount(0)
             cancelAnimationFrame(animationFrameId.current);
         }
-    }, [count, getCurrentInterval, isLastStoryOfUser, nextStory, nextUserStory])
+    }, [count, getCurrentInterval, isLastStoryOfUser, nextStory, nextUserStory, setCount])
 
 
-    useEffect(() => {
-        setCount(0)
-    }, [currentStory, selectedStories])
-
+    // Initial call of requestAnimationFrame
     useEffect(() => {
         if (!pauseStory) {
             animationFrameId.current = requestAnimationFrame(incrementCount)
@@ -68,6 +74,7 @@ const ProgressArray = () => {
             cancelAnimationFrame(animationFrameId.current)
         }
     }, [currentStory, currentUserStoryList, pauseStory, incrementCount])
+
 
     return (
         <div className={classes.progressArr}>
