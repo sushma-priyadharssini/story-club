@@ -23,5 +23,6 @@ body, #root {
   margin: 10px auto;
   border: 1px solid rgb(129, 124, 124);
   border-radius: 10px;
+  background-color: black;
 }
 

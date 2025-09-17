@@ -9,6 +9,7 @@ const StoryContainer = () => {
         currentUserStoryList,
         currentStory,
         setCurrentStory,
+        pauseStory,
         setPauseStory
     } = useContext(storyContext);
 
@@ -16,6 +17,17 @@ const StoryContainer = () => {
         const currentUserStory = stories.find(story => story.id === currentUserStoryList?.id);
         setCurrentStory(currentUserStory?.stories[0])
     }, [currentUserStoryList, stories, setCurrentStory])
+
+    useEffect(() => {
+        const video = document.getElementById("video-story");
+        if (currentStory?.type === "VIDEO") {
+            if (pauseStory) {
+                video?.pause()
+            } else {
+                video?.play()
+            }
+        }
+    }, [pauseStory, currentStory])
 
     const { text, src, type: mediaType, color } = currentStory || {};
 
@@ -34,11 +46,11 @@ const StoryContainer = () => {
                             ),
                             // eslint-disable-next-line
                             ['IMAGE']: (
-                                <img src={src} alt="img"></img>
+                                <img src={src} width="100%" alt="img"></img>
                             ),
                             // eslint-disable-next-line
                             ['VIDEO']: (
-                                <video width="320" height="240" autoPlay>
+                                <video id="video-story" width="100%" height="100%" autoPlay>
                                     <source src={src} type="video/mp4" />
                                 </video>
                             ),
